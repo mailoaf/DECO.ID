@@ -1,0 +1,739 @@
+:root {
+    --bg-dark: #070708;
+    --card-bg: rgba(16, 16, 18, 0.75);
+    --card-border: #1a1a1f;
+    --text-primary: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --text-muted: #52525b;
+    
+    /* Priluv Crimson Red Scheme */
+    --primary-red: #bf2c24;
+    --primary-red-hover: #a5251e;
+    --primary-red-glow: rgba(191, 44, 36, 0.3);
+    
+    --success-red-bg: rgba(191, 44, 36, 0.1);
+    --success-red-border: rgba(191, 44, 36, 0.4);
+    
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    
+    --radius-lg: 12px;
+    --radius-md: 8px;
+    --radius-sm: 4px;
+    
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Full Viewport App Wrapper */
+.app-wrapper {
+    width: 92%;
+    max-width: 1140px;
+    height: 100vh;
+    max-height: 100vh;
+    padding: 24px 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+/* Header */
+.app-header {
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.logo-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    color: #ffffff;
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.logo-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin-left: 2px;
+}
+
+.logo-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* Pacman Carousel */
+.carousel-container {
+    background: rgba(255, 255, 255, 0.01);
+    border-top: 1px solid var(--card-border);
+    border-bottom: 1px solid var(--card-border);
+    height: 48px;
+    min-height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pacman sitting on the left */
+.pacman-char-wrapper {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    background: var(--bg-dark); /* match page bg to mask overflow correctly */
+    display: flex;
+    align-items: center;
+}
+
+.pacman-char {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-red);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 10px var(--primary-red-glow);
+}
+
+.pacman-char::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; width: 20px; height: 20px;
+    background: var(--bg-dark); /* matches bg color */
+    clip-path: polygon(100% 74%, 50% 50%, 100% 26%);
+    animation: chomp 0.35s infinite alternate;
+}
+
+@keyframes chomp {
+    0% { clip-path: polygon(100% 50%, 50% 50%, 100% 50%); }
+    100% { clip-path: polygon(100% 85%, 50% 50%, 100% 15%); }
+}
+
+/* Text track wrapper starts to the right of Pacman's mouth */
+.carousel-text-wrapper {
+    position: absolute;
+    left: 42px; /* starts exactly where Pacman's mouth opens */
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-fade-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    background: linear-gradient(to right, var(--bg-dark), transparent);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.carousel-fade-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    background: linear-gradient(to left, var(--bg-dark), transparent);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.carousel-track {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: marquee 20s infinite linear;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.carousel-item {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.carousel-dot {
+    color: var(--primary-red);
+    margin: 0 16px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Fullscreen Grid Layout */
+.wireframe-grid {
+    flex-grow: 1;
+    height: 0;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.column-left, .column-right {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 0;
+}
+
+/* Card layout */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(25px);
+    transition: var(--transition);
+}
+
+.card:hover {
+    border-color: #2b2b35;
+}
+
+.card-header-label {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--card-border);
+    border-left: 4px solid var(--primary-red);
+    background: linear-gradient(90deg, rgba(191, 44, 36, 0.15) 0%, rgba(191, 44, 36, 0.01) 100%);
+    box-shadow: inset 4px 0 10px rgba(191, 44, 36, 0.1);
+    flex-shrink: 0;
+}
+
+.card-header-label span {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--primary-red);
+    text-shadow: 0 0 8px var(--primary-red-glow);
+}
+
+.card-body {
+    padding: 16px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+}
+
+/* Centered editable text containers */
+.centered-text-container {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    word-break: break-word;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+/* Placeholder support for div contenteditable */
+.centered-text-container:empty::before {
+    content: attr(placeholder);
+    color: var(--text-muted);
+    opacity: 0.65;
+    pointer-events: none;
+    display: block;
+}
+
+.card-input {
+    flex: 1;
+}
+
+/* Input header - left-aligned with monospace cyber text */
+.input-header {
+    text-align: left;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--card-border);
+}
+
+
+/* Split buttons footer */
+.card-footer-buttons {
+    display: flex;
+    border-top: 1px solid var(--card-border);
+    flex-shrink: 0;
+}
+
+.footer-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 14px;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+}
+
+.btn-paste-half {
+    border-right: 1px solid var(--card-border);
+    background: transparent;
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
+.btn-paste-half:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: #f87171;
+}
+
+.btn-delete-half:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: #f87171;
+}
+
+/* GitHub Resource Card styles */
+.card-github {
+    flex: 1; /* Grow/shrink ratio to balance the height of left column */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none; /* remove underline */
+}
+
+.github-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px 20px;
+    height: 100%;
+    z-index: 1;
+}
+
+.github-content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
+    z-index: 1;
+}
+
+.github-left-logo {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--primary-red);
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: 0 0 15px rgba(191, 44, 36, 0.2);
+    background: rgba(191, 44, 36, 0.05);
+    transition: var(--transition);
+}
+
+.github-main-logo {
+    width: 100%;
+    height: 100%;
+    fill: var(--primary-red);
+    transition: var(--transition);
+}
+
+.github-right-text {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.github-message {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.github-author {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.github-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+    z-index: 1;
+}
+
+.github-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: var(--transition);
+}
+
+.github-btn .arrow {
+    transition: transform 0.25s ease;
+}
+
+/* Hover effects */
+.card-github:hover {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 20px 0 rgba(191, 44, 36, 0.25);
+}
+
+.card-github:hover .github-btn {
+    color: #ffffff;
+    text-shadow: 0 0 8px var(--primary-red-glow);
+}
+
+.card-github:hover .github-btn .arrow {
+    transform: translateX(4px);
+}
+
+.card-github:hover .github-left-logo {
+    border-color: #ff3333;
+    box-shadow: 0 0 20px rgba(255, 51, 51, 0.4);
+    background: rgba(255, 51, 51, 0.1);
+}
+
+.card-github:hover .github-main-logo {
+    fill: #ff3333;
+}
+
+/* RESULT Card styles - Balanced flex for a clean look */
+.card-result {
+    flex: 1;
+}
+
+.result-textarea-container {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.card-result textarea {
+    padding-bottom: 34px;
+}
+
+.btn-copy-inline {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(135deg, #bf2c24 0%, #8c1d18 100%);
+    border: none;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(191, 44, 36, 0.25);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.btn-copy-inline:hover {
+    background: linear-gradient(135deg, #d33c33 0%, #a5251e 100%);
+    box-shadow: 0 6px 16px var(--primary-red-glow);
+}
+
+/* ENCODER TYPE Card - Balanced flex for a clean look */
+.card-encoder-type {
+    flex: 1;
+}
+
+/* ENCODER TYPE header - Styled to match PLAINTEXT/INPUT accents */
+.card-encoder-type .card-header-label {
+    border-bottom: 1px solid var(--card-border);
+    border-left: 4px solid var(--primary-red);
+    background: linear-gradient(90deg, rgba(191, 44, 36, 0.15) 0%, rgba(191, 44, 36, 0.01) 100%);
+    box-shadow: inset 4px 0 10px rgba(191, 44, 36, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-encoder-type .card-header-label span {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--primary-red);
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 8px var(--primary-red-glow);
+}
+
+@keyframes blinkRed {
+    0% { opacity: 0.4; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 12px rgba(191, 44, 36, 0.8); }
+}
+
+/* ENCODER TYPE Success Banner */
+.success-banner-box {
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-size: 1.05rem;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.success-banner-box.success {
+    background: rgba(0, 255, 135, 0.06);
+    border: 1px solid #00ff87;
+    color: #00ff87;
+    box-shadow: 0 0 15px rgba(0, 255, 135, 0.20), inset 0 0 10px rgba(0, 255, 135, 0.05);
+    text-shadow: 0 0 8px rgba(0, 255, 135, 0.6);
+}
+
+.success-banner-box.mismatch {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--card-border);
+    color: var(--text-muted);
+}
+
+/* Decoder status list / bubbles */
+.decoder-bubbles-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+}
+
+/* Scrollbar styling */
+.decoder-bubbles-container::-webkit-scrollbar {
+    width: 4px;
+}
+.decoder-bubbles-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.decoder-bubbles-container::-webkit-scrollbar-thumb {
+    background: var(--card-border);
+    border-radius: 4px;
+}
+
+@keyframes bubbleRise {
+    0% { opacity: 0; transform: translateY(20px) scale(0.95); filter: brightness(1.3); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); }
+}
+
+.decoder-bubble {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--card-border);
+    border-radius: 30px; /* bubble pill shape */
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: var(--transition);
+    animation: bubbleRise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.decoder-bubble:hover {
+    border-color: #2b2b35;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.decoder-bubble.success {
+    background: rgba(0, 255, 135, 0.04);
+    border-color: #00ff87;
+    box-shadow: 0 0 12px rgba(0, 255, 135, 0.15);
+    border-left: 4px solid #00ff87;
+}
+
+.bubble-name {
+    color: #ffffff;
+}
+
+.bubble-status {
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.status-txt-mismatch {
+    color: var(--text-muted);
+}
+
+.status-txt-success {
+    color: #00ff87;
+    text-shadow: 0 0 8px rgba(0, 255, 135, 0.5);
+}
+
+/* Toast Notifications */
+.notification {
+    position: fixed;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-red);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 12px 28px;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 30px var(--primary-red-glow);
+    transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 100;
+}
+
+.notification.show {
+    bottom: 40px;
+}
+
+/* Mobile responsive */
+@media (max-width: 800px) {
+    body {
+        overflow-y: auto;
+        height: auto;
+    }
+    .app-wrapper {
+        height: auto;
+        max-height: none;
+        padding: 20px 0;
+    }
+    .wireframe-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .column-left, .column-right {
+        height: auto;
+    }
+
+    /* Hide Pacman on mobile to prevent overlap bug */
+    .pacman-char-wrapper {
+        display: none;
+    }
+    .carousel-container {
+        height: 44px;
+        min-height: 44px;
+    }
+    .carousel-text-wrapper {
+        left: 0;
+    }
+
+    /* Card min heights for mobile */
+    .card-input {
+        min-height: 200px;
+    }
+    .card-result {
+        min-height: 180px;
+    }
+    .card-encoder-type {
+        min-height: 300px;
+    }
+
+    /* Push GitHub card to the very bottom on mobile */
+    .column-left {
+        display: contents;
+    }
+    .column-right {
+        display: contents;
+    }
+    .card-input {
+        order: 1;
+    }
+    .card-result {
+        order: 2;
+    }
+    .card-encoder-type {
+        order: 3;
+    }
+    .card-github {
+        order: 4;
+    }
+
+    .maze-background {
+        display: none;
+    }
+}

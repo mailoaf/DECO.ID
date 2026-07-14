@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DECO.ID - Universal Decoder</title>
+    <meta name="description" content="Decode any ciphertext using 13 variations instantly.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="logo-title">DECO<span class="logo-italic">.ID</span></h1>
+            <p class="logo-subtitle">Decrypt any encrypted text using 13 variations</p>
+        </header>
+
+        <!-- Pacman Carousel -->
+        <div class="carousel-container">
+            <!-- Pacman Character on Left -->
+            <div class="pacman-char-wrapper">
+                <div class="pacman-char"></div>
+            </div>
+            <!-- Text/Dots Track that scrolls into Pacman's mouth -->
+            <div class="carousel-text-wrapper">
+                <div class="carousel-fade-left"></div>
+                <div class="carousel-fade-right"></div>
+                <div class="carousel-track">
+                    <span class="carousel-item">Base 64</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Base 16</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Base 32</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Base 58</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Base 85</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">ASCII85</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Morse Code</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Binary</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Octal</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Decimal</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Unicode Escape</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">HTML Entities</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">URL Encode</span> <span class="carousel-dot">•</span>
+                    
+                    <!-- Duplicate items for smooth infinite loop -->
+                    <span class="carousel-item">Base 64</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Base 16</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Base 32</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Base 58</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Base 85</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">ASCII85</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Morse Code</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Binary</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Octal</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Decimal</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">Unicode Escape</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">HTML Entities</span> <span class="carousel-dot">•</span>
+                    <span class="carousel-item">URL Encode</span> <span class="carousel-dot">•</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wireframe Grid Layout -->
+        <div class="wireframe-grid">
+            
+            <!-- Left Column -->
+            <div class="column-left">
+                <!-- INPUT Card -->
+                <div class="card card-input">
+                    <div class="card-header-label input-header">
+                        <span>Input</span>
+                    </div>
+                    <div class="card-body">
+                        <div id="decoder-input" class="centered-text-container" contenteditable="true" placeholder="- - - -"></div>
+                    </div>
+                    <div class="card-footer-buttons">
+                        <button id="btn-paste" class="footer-btn btn-paste-half">Paste</button>
+                        <button id="btn-clear" class="footer-btn btn-delete-half">Delete</button>
+                    </div>
+                </div>
+
+                <!-- GitHub Walkthrough Resource Card -->
+                <a href="https://github.com/mailoaf/DECO.ID" target="_blank" class="card card-github">
+                    <div class="card-header-label">
+                        <span>GitHub</span>
+                    </div>
+                    <div class="card-body github-body">
+                        <!-- Content wrapper with Left (logo) and Right (text) -->
+                        <div class="github-content-wrapper">
+                            <div class="github-left-logo">
+                                <!-- GitHub SVG icon with red stroke/fill -->
+                                <svg class="github-main-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                                </svg>
+                            </div>
+                            <div class="github-right-text">
+                                <p class="github-message">For the project documentation you can check at my github repository!!</p>
+                                <p class="github-author">— mai</p>
+                            </div>
+                        </div>
+                        <div class="github-footer">
+                            <span class="github-btn">READ DOCUMENTATION <span class="arrow">»</span></span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Right Column -->
+            <div class="column-right">
+                <!-- RESULT Card -->
+                <div class="card card-result">
+                    <div class="card-header-label">
+                        <span>Plaintext</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="result-textarea-container">
+                            <div id="decoder-output" class="centered-text-container" contenteditable="false" placeholder="- - - -"></div>
+                            <button id="btn-copy" class="btn-copy-inline">copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ENCODER TYPE Card -->
+                <div class="card card-encoder-type">
+                    <div class="card-header-label">
+                        <span>Type</span>
+                    </div>
+                    <div class="card-body flex-column">
+                        <!-- Main prominent Success Banner -->
+                        <div id="success-banner" class="success-banner-box mismatch">
+                            <span id="success-banner-text">NO SUCCESS DETECTED</span>
+                        </div>
+                        
+                        <div class="decoder-bubbles-container" id="decoder-bubbles-list">
+                            <!-- Dynamic bubbles from JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="notification" class="notification">Text copied to clipboard!</div>
+
+    <!-- Script -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
