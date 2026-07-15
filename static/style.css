@@ -545,6 +545,31 @@ body {
     100% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 12px rgba(191, 44, 36, 0.8); }
 }
 
+.text-not-found {
+    color: #ff3b30 !important;
+    text-shadow: 0 0 8px rgba(255, 59, 48, 0.6);
+}
+
+@keyframes neonBlink {
+    0% {
+        border-color: rgba(255, 59, 48, 0.3);
+        color: rgba(255, 59, 48, 0.5);
+        box-shadow: 0 0 4px rgba(255, 59, 48, 0.15), inset 0 0 2px rgba(255, 59, 48, 0.05);
+        text-shadow: 0 0 2px rgba(255, 59, 48, 0.3);
+    }
+    100% {
+        border-color: rgba(255, 59, 48, 1);
+        color: rgba(255, 59, 48, 1);
+        box-shadow: 0 0 15px rgba(255, 59, 48, 0.6), inset 0 0 8px rgba(255, 59, 48, 0.2);
+        text-shadow: 0 0 8px rgba(255, 59, 48, 0.8);
+    }
+}
+
+.success-banner-box.mismatch.blink-neon {
+    animation: neonBlink 1s infinite alternate;
+    background: rgba(255, 59, 48, 0.05);
+}
+
 /* ENCODER TYPE Success Banner */
 .success-banner-box {
     padding: 14px;

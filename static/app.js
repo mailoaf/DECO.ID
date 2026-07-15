@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset interface to initial state
     function clearAll() {
         decoderInput.innerText = '';
+        decoderOutput.classList.remove('text-not-found');
         scrambleText('');
         
         successBanner.className = 'success-banner-box mismatch';
@@ -120,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const firstSuccess = data.results.find(r => r.status === 'SUKSES');
 
                 if (firstSuccess) {
+                    decoderOutput.classList.remove('text-not-found');
                     // Trigger scrambling animation
                     scrambleText(firstSuccess.result);
                     
@@ -128,17 +130,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     successBannerText.textContent = `${firstSuccess.name.toUpperCase()} SUCCESS`;
                 } else {
                     // No successes
-                    scrambleText('');
+                    decoderOutput.classList.add('text-not-found');
+                    scrambleText('NOT FOUND');
                     
-                    successBanner.className = 'success-banner-box mismatch';
+                    successBanner.className = 'success-banner-box mismatch blink-neon';
                     successBannerText.textContent = 'NO SUCCESS DETECTED';
                 }
 
                 // Render dynamic table rows
                 renderDecoderTable(data.results);
             } else {
-                scrambleText('');
-                successBanner.className = 'success-banner-box mismatch';
+                decoderOutput.classList.add('text-not-found');
+                scrambleText('NOT FOUND');
+                successBanner.className = 'success-banner-box mismatch blink-neon';
                 successBannerText.textContent = 'NO SUCCESS DETECTED';
                 
                 // Show default decoders list on error
@@ -150,6 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (err) {
             console.error(err);
             showNotification('Failed to connect to server.', false);
+            decoderOutput.classList.add('text-not-found');
+            scrambleText('NOT FOUND');
+            successBanner.className = 'success-banner-box mismatch blink-neon';
+            successBannerText.textContent = 'NO SUCCESS DETECTED';
         }
     }
 
@@ -185,6 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPaste.addEventListener('click', async () => {
         try {
             const text = await navigator.clipboard.readText();
+            if (!text || !text.trim()) {
+                showNotification('No text found in clipboard!', false);
+                return;
+            }
             decoderInput.innerText = text;
             runDecoding(); // Run immediately on paste
         } catch (err) {
@@ -198,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnCopy.addEventListener('click', async () => {
-        if (!decoderOutput.innerText.trim()) {
+        if (!decoderOutput.innerText.trim() || decoderOutput.classList.contains('text-not-found')) {
             showNotification('No result to copy!', false);
             return;
         }
